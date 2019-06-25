@@ -1,13 +1,13 @@
 services: docker
 env:
   global:
-  - GCP_PROJECT_ID=your-project-id
+  - GCP_PROJECT_ID=docker-react-travisci
   - IMAGE=gcr.io/your-project-id/example-app
-  - CLOUD_RUN_SERVICE=example-app
-  - CLOUD_RUN_REGION=us-central1
+  - CLOUD_RUN_SERVICE=
+  - CLOUD_RUN_REGION=asia-east1
   - CLOUDSDK_CORE_DISABLE_PROMPTS=1 # prevent gcloud from prompting
 before_install:
-- echo REMOVE_ME # replace with the openssl command from "travis encrypt-file"
+- openssl aes-256-cbc -K $encrypted_fbfaf42b268c_key -iv $encrypted_fbfaf42b268c_iv -in google-key.json.enc -out google-key.json -d
 - curl https://sdk.cloud.google.com | bash > /dev/null
 - source "$HOME/google-cloud-sdk/path.bash.inc"
 - gcloud auth activate-service-account --key-file=google-key.json
